@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		A57CD6491A4A5F380062EB75 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A57CD6481A4A5F380062EB75 /* main.cpp */; };
+		A57CD6541A4A62080062EB75 /* EightPuzzle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A57CD6521A4A62080062EB75 /* EightPuzzle.cpp */; };
+		A57CD6571A4A62270062EB75 /* HeuristicNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A57CD6551A4A62270062EB75 /* HeuristicNode.cpp */; };
+		A57CD65A1A4A623A0062EB75 /* HeuristicTree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A57CD6581A4A623A0062EB75 /* HeuristicTree.cpp */; };
+		A57CD65D1A4A624B0062EB75 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A57CD65B1A4A624B0062EB75 /* Board.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +29,14 @@
 /* Begin PBXFileReference section */
 		A57CD6451A4A5F380062EB75 /* EightPuzzle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = EightPuzzle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A57CD6481A4A5F380062EB75 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A57CD6521A4A62080062EB75 /* EightPuzzle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EightPuzzle.cpp; sourceTree = "<group>"; };
+		A57CD6531A4A62080062EB75 /* EightPuzzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EightPuzzle.h; sourceTree = "<group>"; };
+		A57CD6551A4A62270062EB75 /* HeuristicNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeuristicNode.cpp; sourceTree = "<group>"; };
+		A57CD6561A4A62270062EB75 /* HeuristicNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeuristicNode.h; sourceTree = "<group>"; };
+		A57CD6581A4A623A0062EB75 /* HeuristicTree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeuristicTree.cpp; sourceTree = "<group>"; };
+		A57CD6591A4A623A0062EB75 /* HeuristicTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeuristicTree.h; sourceTree = "<group>"; };
+		A57CD65B1A4A624B0062EB75 /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
+		A57CD65C1A4A624B0062EB75 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +70,14 @@
 			isa = PBXGroup;
 			children = (
 				A57CD6481A4A5F380062EB75 /* main.cpp */,
+				A57CD6521A4A62080062EB75 /* EightPuzzle.cpp */,
+				A57CD6531A4A62080062EB75 /* EightPuzzle.h */,
+				A57CD6551A4A62270062EB75 /* HeuristicNode.cpp */,
+				A57CD6561A4A62270062EB75 /* HeuristicNode.h */,
+				A57CD6581A4A623A0062EB75 /* HeuristicTree.cpp */,
+				A57CD6591A4A623A0062EB75 /* HeuristicTree.h */,
+				A57CD65B1A4A624B0062EB75 /* Board.cpp */,
+				A57CD65C1A4A624B0062EB75 /* Board.h */,
 			);
 			path = EightPuzzle;
 			sourceTree = "<group>";
@@ -118,7 +138,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A57CD6571A4A62270062EB75 /* HeuristicNode.cpp in Sources */,
 				A57CD6491A4A5F380062EB75 /* main.cpp in Sources */,
+				A57CD65A1A4A623A0062EB75 /* HeuristicTree.cpp in Sources */,
+				A57CD65D1A4A624B0062EB75 /* Board.cpp in Sources */,
+				A57CD6541A4A62080062EB75 /* EightPuzzle.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
