@@ -1,36 +1,36 @@
-//
-//  Board.cpp
-//  EightPuzzle
-//
-//  Created by Demetrious  Wilson on 12/23/14.
-//  Copyright (c) 2014 Demetrious  Wilson. All rights reserved.
-//
-
 #include "Board.h"
 
 EightPuzzle::Board::Board(std::vector<unsigned int> boardContents) : contents(boardContents) {
 }
 
-EightPuzzle::Board EightPuzzle::Board::slide(unsigned int position) {
-    Board newBoard;
+void EightPuzzle::Board::slide(unsigned int position) {
+    unsigned int indexOfPosition{0};
+    size_t contentsSize{contents.size()};
     
-    unsigned int temp = contents[position];
-    contents[0] = temp;
+    for(unsigned int i = 0; i < contentsSize; ++i) {
+        if(position == contents.at(i)) {
+            indexOfPosition = i;
+        }
+    }
     
-    newBoard.contents = contents;
-    
-    return newBoard;
+    std::swap(contents.at(0), contents.at(indexOfPosition));
 }
 
 void EightPuzzle::Board::print() {
+    std::map<unsigned int, unsigned int> printMap;
     size_t contentsSize = contents.size();
+    size_t i = 0;
     
-    for(size_t i = 0; i < contentsSize; ++i) {
+    for(; i < contentsSize; ++i) {
+        printMap[contents.at(i)] = (unsigned int)i;
+    }
+    
+    for(i = 0; i < contentsSize; ++i) {
         if(i > 0 && i % 3 == 0) {
             std::cout << std::endl;
         }
         
-        std::cout << " " << contents[i] << " ";
+        std::cout << " " << printMap.at((unsigned int)i) << " ";
     }
     std::cout << std::endl;
 }

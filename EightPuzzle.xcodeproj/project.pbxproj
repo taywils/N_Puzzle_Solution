@@ -37,6 +37,7 @@
 		A57CD6591A4A623A0062EB75 /* HeuristicTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeuristicTree.h; sourceTree = "<group>"; };
 		A57CD65B1A4A624B0062EB75 /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
 		A57CD65C1A4A624B0062EB75 /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
+		A57CD65E1A4AC5F80062EB75 /* RandomSelector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RandomSelector.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,7 @@
 				A57CD6591A4A623A0062EB75 /* HeuristicTree.h */,
 				A57CD65B1A4A624B0062EB75 /* Board.cpp */,
 				A57CD65C1A4A624B0062EB75 /* Board.h */,
+				A57CD65E1A4AC5F80062EB75 /* RandomSelector.h */,
 			);
 			path = EightPuzzle;
 			sourceTree = "<group>";

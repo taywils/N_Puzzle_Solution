@@ -61,11 +61,7 @@ namespace EightPuzzle {
         }
     };
     
-    std::vector<unsigned int> target{
-        1, 2, 3,
-        4, 0, 5,
-        6, 7, 8
-    };
+    std::vector<unsigned int> target{ 4, 0, 1, 2, 3, 5, 6, 7, 8 };
     
     unsigned int getManhattanDistFrom(int boardPosition, int targetPosition) {
         return manhattanTable.at((unsigned)boardPosition).at((unsigned)targetPosition);

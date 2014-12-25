@@ -1,12 +1,5 @@
-//
-//  HeuristicTree.cpp
-//  EightPuzzle
-//
-//  Created by Demetrious  Wilson on 12/23/14.
-//  Copyright (c) 2014 Demetrious  Wilson. All rights reserved.
-//
-
 #include "HeuristicTree.h"
+#include "RandomSelector.h"
 
 EightPuzzle::HeuristicTree::HeuristicTree(HeuristicNode* root) : root(root) {
     
@@ -25,11 +18,11 @@ void EightPuzzle::HeuristicTree::generateMoves() {
     
     for(auto idx : legalMoveVector) {
         HeuristicNode* newHeuristicNode;
-        Board newBoard{root->board.contents};
+        Board newBoard{getRoot()->board.contents};
         
         newBoard.slide(idx);
         
-        newHeuristicNode = new HeuristicNode{newBoard, root};
+        newHeuristicNode = new HeuristicNode{newBoard, getRoot()};
         newHeuristicNode->calculateScore(Board(EightPuzzle::target));
         
         decisionVector.push_back(newHeuristicNode->getScore());
@@ -40,15 +33,29 @@ void EightPuzzle::HeuristicTree::generateMoves() {
 
 void EightPuzzle::HeuristicTree::move() {
     generateMoves();
-    
-    std::vector<unsigned int>::iterator minScoreIterator =
-    std::min_element(std::begin(decisionVector), std::end(decisionVector));
-    
-    auto minScoreIndex = std::distance(std::begin(decisionVector), minScoreIterator);
-    
-    setRoot(root->children.at((unsigned)minScoreIndex));
+    setRoot(getRoot()->children.at(makeDecision()));
+    decisionVector.clear();
 }
 
 bool EightPuzzle::HeuristicTree::isSolved() {
     return 0 == getRoot()->getScore();
+}
+
+unsigned int EightPuzzle::HeuristicTree::makeDecision() {
+    random_selector<> randSelector{};
+    std::vector<unsigned int>::iterator minScoreIterator = std::min_element(std::begin(decisionVector), std::end(decisionVector));
+    
+    auto minScoreIndex = std::distance(std::begin(decisionVector), minScoreIterator);
+    auto minScoreVal = decisionVector.at((unsigned)minScoreIndex);
+    
+    std::vector<unsigned int> temp;
+    unsigned int tempIdx{0};
+    for(auto v : decisionVector) {
+        if(minScoreVal == v) {
+            temp.push_back(tempIdx);
+        }
+        ++tempIdx;
+    }
+    
+    return randSelector(temp);
 }

@@ -1,11 +1,3 @@
-//
-//  HeuristicNode.cpp
-//  EightPuzzle
-//
-//  Created by Demetrious  Wilson on 12/23/14.
-//  Copyright (c) 2014 Demetrious  Wilson. All rights reserved.
-//
-
 #include "HeuristicNode.h"
 
 EightPuzzle::HeuristicNode::HeuristicNode(EightPuzzle::Board board) :

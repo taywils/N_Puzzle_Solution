@@ -1,17 +1,12 @@
-//
-//  EightPuzzle.h
-//  EightPuzzle
-//
-//  Created by Demetrious  Wilson on 12/23/14.
-//  Copyright (c) 2014 Demetrious  Wilson. All rights reserved.
-//
-
 #ifndef __EightPuzzle__EightPuzzle__
 #define __EightPuzzle__EightPuzzle__
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <map>
+#include <random>
+#include <iterator>
 
 namespace EightPuzzle {
     // Values
@@ -23,4 +18,4 @@ namespace EightPuzzle {
     extern unsigned int getManhattanDistFrom(int, int);
 }
 
-#endif /* defined(__EightPuzzle__EightPuzzle__) */
+#endif

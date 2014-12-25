@@ -1,11 +1,3 @@
-//
-//  HeuristicTree.h
-//  EightPuzzle
-//
-//  Created by Demetrious  Wilson on 12/23/14.
-//  Copyright (c) 2014 Demetrious  Wilson. All rights reserved.
-//
-
 #ifndef __EightPuzzle__HeuristicTree__
 #define __EightPuzzle__HeuristicTree__
 
@@ -17,12 +9,13 @@ namespace EightPuzzle {
     class HeuristicTree {
     public:
         
-        HeuristicTree(HeuristicNode* root);
+        HeuristicTree(HeuristicNode*);
         
-        void setRoot(HeuristicNode *node);
+        void setRoot(HeuristicNode*);
         HeuristicNode* getRoot();
         void move();
         bool isSolved();
+        unsigned int makeDecision();
         
     private:
         
@@ -32,4 +25,4 @@ namespace EightPuzzle {
     };
 }
 
-#endif /* defined(__EightPuzzle__HeuristicTree__) */
+#endif

@@ -1,11 +1,3 @@
-//
-//  HeuristicNode.h
-//  EightPuzzle
-//
-//  Created by Demetrious  Wilson on 12/23/14.
-//  Copyright (c) 2014 Demetrious  Wilson. All rights reserved.
-//
-
 #ifndef __EightPuzzle__HeuristicNode__
 #define __EightPuzzle__HeuristicNode__
 
@@ -17,10 +9,10 @@ namespace EightPuzzle {
     class HeuristicNode {
     public:
         
-        HeuristicNode(Board board);
-        HeuristicNode(Board board, HeuristicNode* parent);
+        HeuristicNode(Board);
+        HeuristicNode(Board, HeuristicNode*);
         
-        void calculateScore(Board target);
+        void calculateScore(Board);
         unsigned int getScore();
         
         Board board;
@@ -33,4 +25,4 @@ namespace EightPuzzle {
     };
 }
 
-#endif /* defined(__EightPuzzle__HeuristicNode__) */
+#endif
