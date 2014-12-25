@@ -12,6 +12,7 @@ namespace EightPuzzle {
         
         void slide(unsigned int position);
         void print();
+        unsigned int getZeroPosition();
         
         std::vector<unsigned int> contents;
     };

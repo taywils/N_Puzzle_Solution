@@ -12,16 +12,18 @@ int main(int argc, const char * argv[]) {
     EightPuzzle::HeuristicTree ht(&hn);
 
     ht.getRoot()->calculateScore(EightPuzzle::target);
+
     ht.getRoot()->board.print();
 
+    std::cout << "Path of the blank space across the board" << std::endl;
     unsigned int moves = 0;
     while(!ht.isSolved()) {
         ht.move();
         ++moves;
-        //std::cout << std::endl;
-        //ht.getRoot()->board.print();
     }
-    std::cout << "Took " << moves << " moves to finish" << std::endl;
+    std::cout << "\nTook " << moves << " moves to finish" << std::endl;
+
     ht.getRoot()->board.print();
+
     return 0;
 }

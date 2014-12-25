@@ -34,3 +34,7 @@ void EightPuzzle::Board::print() {
     }
     std::cout << std::endl;
 }
+
+unsigned int EightPuzzle::Board::getZeroPosition() {
+    return contents.at(0);
+}
