@@ -22,6 +22,11 @@ void EightPuzzle::HeuristicTree::generateMoves() {
         
         newBoard.slide(idx);
         
+        // Avoid adding the previous board position
+        if(getRoot()->parent != nullptr && newBoard.contents == getRoot()->parent->board.contents) {
+            continue;
+        }
+
         newHeuristicNode = new HeuristicNode{newBoard, getRoot()};
         newHeuristicNode->calculateScore(Board(EightPuzzle::target));
         
