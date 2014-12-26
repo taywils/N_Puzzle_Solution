@@ -1,5 +1,6 @@
 #include "HeuristicTree.h"
 #include "RandomSelector.h"
+#include <cassert>
 
 EightPuzzle::HeuristicTree::HeuristicTree(HeuristicNode* root) : root(root) {
     
@@ -56,18 +57,17 @@ unsigned int EightPuzzle::HeuristicTree::makeDecision() {
     random_selector<> randSelector{};
     std::vector<unsigned int>::iterator minScoreIterator = std::min_element(std::begin(decisionVector), std::end(decisionVector));
 
-    auto minScoreIndex = std::distance(std::begin(decisionVector), minScoreIterator);
-    auto minScoreVal = decisionVector.at((unsigned)minScoreIndex);
-    
-    std::vector<unsigned int> temp;
-    unsigned int tempIdx{0};
+    auto minScoreVal = *minScoreIterator;
+
+    std::vector<unsigned int> childrenIndexVector;
+    unsigned int childrenIndex{0};
 
     for(auto v : decisionVector) {
         if(minScoreVal == v) {
-            temp.push_back(tempIdx);
+            childrenIndexVector.push_back(childrenIndex);
         }
-        ++tempIdx;
+        ++childrenIndex;
     }
 
-    return randSelector(temp);
+    return randSelector(childrenIndexVector);
 }
