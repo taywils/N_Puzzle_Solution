@@ -15,7 +15,7 @@ EightPuzzle::HeuristicNode* EightPuzzle::HeuristicTree::getRoot() {
 }
 
 void EightPuzzle::HeuristicTree::generateMoves() {
-    std::vector<unsigned int> legalMoveVector = legalMoveTable[root->board.contents[0]];
+    std::vector<unsigned int> legalMoveVector = legalMoveTable[root->board.getZeroPosition()];
 
     for(auto idx : legalMoveVector) {
         HeuristicNode* newHeuristicNode;
@@ -30,7 +30,7 @@ void EightPuzzle::HeuristicTree::generateMoves() {
 
         newHeuristicNode = new HeuristicNode{newBoard, getRoot()};
         newHeuristicNode->calculateScore(Board(EightPuzzle::target));
-        
+
         decisionVector.push_back(newHeuristicNode->getScore());
         
         root->children.push_back(newHeuristicNode);

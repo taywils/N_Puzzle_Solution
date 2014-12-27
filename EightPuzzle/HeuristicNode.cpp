@@ -18,9 +18,15 @@ void EightPuzzle::HeuristicNode::calculateScore(Board target) {
         tempScore += getManhattanDistFrom(board.contents.at(i), target.contents.at(i));
     }
     
-    this->score = tempScore;
+    this->score = tempScore * calculateComplexityFactor();
 }
 
 unsigned int EightPuzzle::HeuristicNode::getScore() {
     return this->score;
+}
+
+unsigned int EightPuzzle::HeuristicNode::calculateComplexityFactor() {
+    // Penalize board positions with high numbers of possible moves
+    auto legalMoves = legalMoveTable[board.getZeroPosition()];
+    return (unsigned int)legalMoves.size();
 }

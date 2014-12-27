@@ -22,6 +22,7 @@ namespace EightPuzzle {
     private:
         
         unsigned int score;
+        unsigned int calculateComplexityFactor();
     };
 }
 
