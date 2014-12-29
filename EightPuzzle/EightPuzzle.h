@@ -16,6 +16,25 @@ namespace EightPuzzle {
     
     // Functions
     extern unsigned int getManhattanDistFrom(int, int);
+
+    class Utility {
+    public:
+        explicit Utility(unsigned int, std::vector< unsigned int >);
+
+        std::vector< std::vector<unsigned int> > getLegalMoveTable();
+        std::vector< unsigned int > getTarget();
+        unsigned int getPuzzleSize();
+
+    private:
+        std::vector< std::vector<unsigned int> > legalMoveTable;
+        std::vector< std::vector<unsigned int> > manhattanTables;
+        std::vector< unsigned int > target;
+        size_t puzzleSize;
+        unsigned int N;
+
+        void generateLegalMoveTable();
+        void generateManhattanTables();
+    };
 }
 
 #endif
