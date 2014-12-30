@@ -2,7 +2,7 @@
 #include "RandomSelector.h"
 #include <cassert>
 
-EightPuzzle::HeuristicTree::HeuristicTree(HeuristicNode* root, Utility utility) : root(root), utility(utility) {
+EightPuzzle::HeuristicTree::HeuristicTree(HeuristicNode* root, Utility* utility) : root(root), utility(utility) {
     
 }
 
@@ -15,7 +15,7 @@ EightPuzzle::HeuristicNode* EightPuzzle::HeuristicTree::getRoot() {
 }
 
 void EightPuzzle::HeuristicTree::generateMoves() {
-    std::vector<unsigned int> legalMoveVector = legalMoveTable[root->board.getZeroPosition()];
+    std::vector<unsigned int> legalMoveVector = getUtility()->getLegalMoveTable()[root->board.getZeroPosition()];
 
     for(auto idx : legalMoveVector) {
         HeuristicNode* newHeuristicNode;
@@ -29,7 +29,7 @@ void EightPuzzle::HeuristicTree::generateMoves() {
         }
 
         newHeuristicNode = new HeuristicNode{newBoard, getRoot()};
-        newHeuristicNode->calculateScore(getUtility().getTarget());
+        newHeuristicNode->calculateScore(getUtility());
 
         decisionVector.push_back(newHeuristicNode->getScore());
         
@@ -72,6 +72,6 @@ unsigned int EightPuzzle::HeuristicTree::makeDecision() {
     return randSelector(childrenIndexVector);
 }
 
-EightPuzzle::Utility EightPuzzle::HeuristicTree::getUtility() {
+EightPuzzle::Utility* EightPuzzle::HeuristicTree::getUtility() {
     return utility;
 }

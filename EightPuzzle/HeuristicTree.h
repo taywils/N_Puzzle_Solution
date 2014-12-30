@@ -9,20 +9,20 @@ namespace EightPuzzle {
     class HeuristicTree {
     public:
         
-        HeuristicTree(HeuristicNode*, Utility);
+        HeuristicTree(HeuristicNode*, Utility*);
         
         void setRoot(HeuristicNode*);
         HeuristicNode* getRoot();
         void move();
         bool isSolved();
         unsigned int makeDecision();
-        Utility getUtility();
+        Utility* getUtility();
         
     private:
         
         void generateMoves();
 
-        Utility utility;
+        Utility* utility;
         HeuristicNode* root;
         std::vector<unsigned int> decisionVector;
     };

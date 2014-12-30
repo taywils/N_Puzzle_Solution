@@ -12,9 +12,9 @@ int main(int argc, const char * argv[]) {
     EightPuzzle::HeuristicNode hn(board);
 
     EightPuzzle::Utility utility(3, { 4, 0, 1, 2, 3, 5, 6, 7, 8 });
-    EightPuzzle::HeuristicTree ht(&hn, utility);
+    EightPuzzle::HeuristicTree ht(&hn, &utility);
 
-    ht.getRoot()->calculateScore(ht.getUtility().getTarget());
+    ht.getRoot()->calculateScore(ht.getUtility());
 
     ht.getRoot()->board.print();
 

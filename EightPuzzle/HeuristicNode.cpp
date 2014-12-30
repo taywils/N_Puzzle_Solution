@@ -10,23 +10,23 @@ board(board),
 parent(parent) {
 }
 
-void EightPuzzle::HeuristicNode::calculateScore(Board target) {
+void EightPuzzle::HeuristicNode::calculateScore(Utility* utility) {
     unsigned int tempScore{ 0 };
-    size_t targetSize = target.contents.size();
-    
+    size_t targetSize = utility->getTarget().size();
+
     for(size_t i = 0; i < targetSize; ++i) {
-        tempScore += getManhattanDistFrom(board.contents.at(i), target.contents.at(i));
+        tempScore += getManhattanDistFrom(board.contents.at(i), utility->getTarget().at(i));
     }
-    
-    this->score = tempScore * calculateComplexityFactor();
+
+    this->score = tempScore * calculateComplexityFactor(utility);
 }
 
 unsigned int EightPuzzle::HeuristicNode::getScore() {
     return this->score;
 }
 
-unsigned int EightPuzzle::HeuristicNode::calculateComplexityFactor() {
+unsigned int EightPuzzle::HeuristicNode::calculateComplexityFactor(Utility* utility) {
     // Penalize board positions with high numbers of possible moves
-    auto legalMoves = legalMoveTable[board.getZeroPosition()];
+    auto legalMoves = utility->getLegalMoveTable()[board.getZeroPosition()];
     return (unsigned int)legalMoves.size();
 }

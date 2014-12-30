@@ -12,7 +12,7 @@ namespace EightPuzzle {
         HeuristicNode(Board);
         HeuristicNode(Board, HeuristicNode*);
         
-        void calculateScore(Board);
+        void calculateScore(Utility*);
         unsigned int getScore();
         
         Board board;
@@ -22,7 +22,7 @@ namespace EightPuzzle {
     private:
         
         unsigned int score;
-        unsigned int calculateComplexityFactor();
+        unsigned int calculateComplexityFactor(Utility*);
     };
 }
 
