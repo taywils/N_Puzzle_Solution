@@ -8,10 +8,13 @@ int main(int argc, const char * argv[]) {
     // Read out loud, zero is at location one, one is at location six and so on.
     std::vector<unsigned int> contents{ 1, 6, 3, 0, 7, 4, 8, 5, 2 };
     EightPuzzle::Board board(contents);
-    EightPuzzle::HeuristicNode hn(board);
-    EightPuzzle::HeuristicTree ht(&hn);
 
-    ht.getRoot()->calculateScore(EightPuzzle::target);
+    EightPuzzle::HeuristicNode hn(board);
+
+    EightPuzzle::Utility utility(3, { 4, 0, 1, 2, 3, 5, 6, 7, 8 });
+    EightPuzzle::HeuristicTree ht(&hn, utility);
+
+    ht.getRoot()->calculateScore(ht.getUtility().getTarget());
 
     ht.getRoot()->board.print();
 

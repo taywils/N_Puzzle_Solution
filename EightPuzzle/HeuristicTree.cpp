@@ -2,7 +2,7 @@
 #include "RandomSelector.h"
 #include <cassert>
 
-EightPuzzle::HeuristicTree::HeuristicTree(HeuristicNode* root) : root(root) {
+EightPuzzle::HeuristicTree::HeuristicTree(HeuristicNode* root, Utility utility) : root(root), utility(utility) {
     
 }
 
@@ -29,7 +29,7 @@ void EightPuzzle::HeuristicTree::generateMoves() {
         }
 
         newHeuristicNode = new HeuristicNode{newBoard, getRoot()};
-        newHeuristicNode->calculateScore(Board(EightPuzzle::target));
+        newHeuristicNode->calculateScore(getUtility().getTarget());
 
         decisionVector.push_back(newHeuristicNode->getScore());
         
@@ -70,4 +70,8 @@ unsigned int EightPuzzle::HeuristicTree::makeDecision() {
     }
 
     return randSelector(childrenIndexVector);
+}
+
+EightPuzzle::Utility EightPuzzle::HeuristicTree::getUtility() {
+    return utility;
 }
