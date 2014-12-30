@@ -15,7 +15,7 @@ void EightPuzzle::HeuristicNode::calculateScore(Utility* utility) {
     size_t targetSize = utility->getTarget().size();
 
     for(size_t i = 0; i < targetSize; ++i) {
-        tempScore += getManhattanDistFrom(board.contents.at(i), utility->getTarget().at(i));
+        tempScore += utility->getManhattanDistFrom(board.contents.at(i), utility->getTarget().at(i));
     }
 
     this->score = tempScore * calculateComplexityFactor(utility);

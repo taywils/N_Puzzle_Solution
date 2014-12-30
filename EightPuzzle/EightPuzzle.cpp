@@ -1,58 +1,6 @@
 #include "EightPuzzle.h"
 
 namespace EightPuzzle {
-    std::vector< std::vector<unsigned int> > manhattanTable {
-        {
-            0, 1, 2,
-            1, 2, 3,
-            2, 3, 4
-        },
-        {
-            1, 0, 1,
-            2, 1, 2,
-            3, 2, 3
-        },
-        {
-            2, 1, 0,
-            3, 2, 1,
-            4, 3, 2
-        },
-        {
-            1, 2, 3,
-            0, 1, 2,
-            1, 2, 3
-        },
-        {
-            2, 1, 2,
-            1, 0, 1,
-            2, 1, 2,
-        },
-        {
-            3, 2, 1,
-            2, 1, 0,
-            3, 2, 1
-        },
-        {
-            2, 3, 4,
-            1, 2, 3,
-            0, 1, 2
-        },
-        {
-            3, 2, 3,
-            2, 1, 2,
-            1, 0, 1
-        },
-        {
-            4, 3, 2,
-            3, 2, 1,
-            2, 1, 0
-        }
-    };
-
-    unsigned int getManhattanDistFrom(int boardPosition, int targetPosition) {
-        return manhattanTable.at((unsigned)boardPosition).at((unsigned)targetPosition);
-    }
-
     Utility::Utility(unsigned int N, std::vector< unsigned int > target) :
         N(N),
         puzzleSize(N * N),
@@ -92,10 +40,6 @@ namespace EightPuzzle {
         }
     }
 
-    std::vector< std::vector<unsigned int> > Utility::getLegalMoveTable() {
-        return legalMoveTable;
-    }
-
     void Utility::generateManhattanTables() {
         int row{0};
         int col{0};
@@ -114,14 +58,6 @@ namespace EightPuzzle {
         }
     }
 
-    std::vector< unsigned int > Utility::getTarget() {
-        return target;
-    }
-
-    unsigned int Utility::getPuzzleSize() {
-        return (unsigned int)puzzleSize;
-    }
-    
     std::vector< unsigned int > Utility::generateManhattanTable(int pointX, int pointY) {
         int row{0};
         int col{0};
@@ -142,5 +78,29 @@ namespace EightPuzzle {
         }
         
         return manhattanRow;
+    }
+
+    std::vector< unsigned int > Utility::getTarget() {
+        return target;
+    }
+
+    unsigned int Utility::getPuzzleSize() {
+        return (unsigned int)puzzleSize;
+    }
+
+    unsigned int Utility::getManhattanDistFrom(int boardPosition, int targetPosition) {
+        return manhattanTables.at((unsigned)boardPosition).at((unsigned)targetPosition);
+    }
+
+    unsigned int Utility::getN() {
+        return N;
+    }
+
+    std::vector< std::vector<unsigned int> > Utility::getLegalMoveTable() {
+        return legalMoveTable;
+    }
+    
+    std::vector< std::vector<unsigned int> > Utility::getManhattanTable() {
+        return manhattanTables;
     }
 }

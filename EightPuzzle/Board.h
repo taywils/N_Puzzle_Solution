@@ -7,7 +7,7 @@ namespace EightPuzzle {
     class Board {
     public:
         
-        Board(std::vector<unsigned int> boardContents);
+        Board(std::vector<unsigned int>, unsigned int);
         Board() {};
         
         void slide(unsigned int position);
@@ -15,6 +15,9 @@ namespace EightPuzzle {
         unsigned int getZeroPosition();
         
         std::vector<unsigned int> contents;
+
+    private:
+        unsigned int N;
     };
 }
 

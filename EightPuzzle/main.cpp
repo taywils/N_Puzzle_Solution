@@ -3,15 +3,17 @@
 #include "HeuristicTree.h"
 
 int main(int argc, const char * argv[]) {
+    const unsigned int N{3};
+
     // For content Vectors
     // { index == number on board -> value == position on board }
     // Read out loud, zero is at location one, one is at location six and so on.
     std::vector<unsigned int> contents{ 1, 6, 3, 0, 7, 4, 8, 5, 2 };
-    EightPuzzle::Board board(contents);
+    EightPuzzle::Board board(contents, N);
 
     EightPuzzle::HeuristicNode hn(board);
 
-    EightPuzzle::Utility utility(3, { 4, 0, 1, 2, 3, 5, 6, 7, 8 });
+    EightPuzzle::Utility utility(N, { 4, 0, 1, 2, 3, 5, 6, 7, 8 });
     EightPuzzle::HeuristicTree ht(&hn, &utility);
 
     ht.getRoot()->calculateScore(ht.getUtility());

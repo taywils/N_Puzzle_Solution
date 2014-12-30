@@ -19,7 +19,7 @@ void EightPuzzle::HeuristicTree::generateMoves() {
 
     for(auto idx : legalMoveVector) {
         HeuristicNode* newHeuristicNode;
-        Board newBoard{getRoot()->board.contents};
+        Board newBoard{getRoot()->board.contents, utility->getN()};
 
         newBoard.slide(idx);
 

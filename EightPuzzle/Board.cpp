@@ -1,6 +1,6 @@
 #include "Board.h"
 
-EightPuzzle::Board::Board(std::vector<unsigned int> boardContents) : contents(boardContents) {
+EightPuzzle::Board::Board(std::vector<unsigned int> boardContents, unsigned int N) : contents(boardContents), N(N) {
 }
 
 void EightPuzzle::Board::slide(unsigned int position) {

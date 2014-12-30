@@ -9,25 +9,21 @@
 #include <iterator>
 
 namespace EightPuzzle {
-    // Values
-    extern std::vector< std::vector<unsigned int> > legalMoveTable;
-    extern std::vector< std::vector<unsigned int> > manhattanTable;
-    
-    // Functions
-    extern unsigned int getManhattanDistFrom(int, int);
-
     class Utility {
     public:
         explicit Utility(unsigned int, std::vector< unsigned int >);
 
         std::vector< std::vector<unsigned int> > getLegalMoveTable();
+        std::vector< std::vector<unsigned int> > getManhattanTable();
         std::vector< unsigned int > getTarget();
         unsigned int getPuzzleSize();
+        unsigned int getManhattanDistFrom(int, int);
+        unsigned int getN();
 
     private:
         std::vector< std::vector<unsigned int> > legalMoveTable;
         std::vector< std::vector<unsigned int> > manhattanTables;
-        std::vector< unsigned int > target;
+        std::vector<unsigned int> target;
         size_t puzzleSize;
         unsigned int N;
 
