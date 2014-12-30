@@ -34,6 +34,7 @@ namespace EightPuzzle {
 
         void generateLegalMoveTable();
         void generateManhattanTables();
+        std::vector<unsigned int> generateManhattanTable(int, int);
     };
 }
 

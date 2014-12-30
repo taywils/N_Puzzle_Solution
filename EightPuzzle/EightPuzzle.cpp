@@ -72,7 +72,9 @@ namespace EightPuzzle {
         puzzleSize(N * N),
         target(target)
     {
+        manhattanTables.reserve(puzzleSize);
         generateLegalMoveTable();
+        generateManhattanTables();
     }
 
     void Utility::generateLegalMoveTable() {
@@ -109,7 +111,21 @@ namespace EightPuzzle {
     }
 
     void Utility::generateManhattanTables() {
-
+        int row{0};
+        int col{0};
+        
+        for(;;++col) {
+            if(col > 0 && col % N == 0) {
+                col = 0;
+                ++row;
+            }
+            
+            manhattanTables.push_back(generateManhattanTable(row, col));
+            
+            if(manhattanTables.size() == puzzleSize) {
+                return;
+            }
+        }
     }
 
     std::vector< unsigned int > Utility::getTarget() {
@@ -118,5 +134,27 @@ namespace EightPuzzle {
 
     unsigned int Utility::getPuzzleSize() {
         return (unsigned int)puzzleSize;
+    }
+    
+    std::vector< unsigned int > Utility::generateManhattanTable(int pointX, int pointY) {
+        int row{0};
+        int col{0};
+        std::vector< unsigned int > manhattanRow;
+        manhattanRow.reserve(puzzleSize);
+        
+        for(;;++col) {
+            if(col > 0 && col % N == 0) {
+                col = 0;
+                ++row;
+            }
+            
+            manhattanRow.push_back(abs(row - pointX) + abs(col - pointY));
+            
+            if(manhattanRow.size() == puzzleSize) {
+                break;
+            }
+        }
+        
+        return manhattanRow;
     }
 }
