@@ -14,17 +14,20 @@ namespace EightPuzzle {
         void setRoot(HeuristicNode*);
         HeuristicNode* getRoot();
         void move();
-        bool isSolved();
+        int isSolved();
         unsigned int makeDecision();
         Utility* getUtility();
+        bool isBoardImpossible();
         
     private:
         
         void generateMoves();
+        bool doesBoardHaveSolution();
 
         Utility* utility;
         HeuristicNode* root;
         std::vector<unsigned int> decisionVector;
+        bool impossibleToSolve;
     };
 }
 

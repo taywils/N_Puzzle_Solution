@@ -2,8 +2,11 @@
 #include "RandomSelector.h"
 #include <cassert>
 
-EightPuzzle::HeuristicTree::HeuristicTree(HeuristicNode* root, Utility* utility) : root(root), utility(utility) {
-    
+EightPuzzle::HeuristicTree::HeuristicTree(HeuristicNode* root, Utility* utility) :
+    root(root),
+    utility(utility)
+{
+    impossibleToSolve = !doesBoardHaveSolution();
 }
 
 void EightPuzzle::HeuristicTree::setRoot(EightPuzzle::HeuristicNode *node) {
@@ -24,7 +27,8 @@ void EightPuzzle::HeuristicTree::generateMoves() {
         newBoard.slide(idx);
 
         // Avoid adding the previous board position
-        if(getRoot()->parent != nullptr && newBoard.contents == getRoot()->parent->board.contents) {
+        if(getRoot()->parent != nullptr
+           && newBoard.contents == getRoot()->parent->board.contents) {
             continue;
         }
 
@@ -44,12 +48,13 @@ void EightPuzzle::HeuristicTree::move() {
     EightPuzzle::HeuristicNode* destinationNode = getRoot()->children.at(decisionIndex);
     setRoot(destinationNode);
 
-    std::cout << destinationNode->board.getZeroPosition() << " ";
+    std::cout << std::endl;
+    getRoot()->board.print();
 
     decisionVector.clear();
 }
 
-bool EightPuzzle::HeuristicTree::isSolved() {
+int EightPuzzle::HeuristicTree::isSolved() {
     return 0 == getRoot()->getScore();
 }
 
@@ -74,4 +79,54 @@ unsigned int EightPuzzle::HeuristicTree::makeDecision() {
 
 EightPuzzle::Utility* EightPuzzle::HeuristicTree::getUtility() {
     return utility;
+}
+
+// Based on notes from https://www.cs.princeton.edu/courses/archive/fall12/cos226/assignments/8puzzle.html
+bool EightPuzzle::HeuristicTree::doesBoardHaveSolution() {
+    bool isThereAPossibleSolution{false};
+    auto boardContents = getRoot()->board.contents;
+
+    unsigned int blankIndex{0};
+    for(unsigned int i = 0; i < boardContents.size(); ++i) {
+        if(boardContents.at(i) == 0) {
+            blankIndex = i;
+        }
+    }
+
+    unsigned int blankRowNumber = blankIndex / getUtility()->getN();
+
+    size_t i{1};
+    int j = (int)i - 1;
+    unsigned int inversions{0};
+
+    // The inversion calculation ignores the zero value
+    auto zeroIterator = find(boardContents.begin(), boardContents.end(), 0);
+    if(zeroIterator != boardContents.end()) {
+        boardContents.erase(zeroIterator);
+    }
+
+    while(i < boardContents.size()) {
+        if(boardContents.at(j) > boardContents.at(i)) {
+            inversions++;
+        }
+        
+        --j;
+        
+        if(j < 0) {
+            ++i;
+            j = (int)i - 1;
+        }
+    }
+
+    if(getUtility()->getPuzzleSize() % 2 == 0) { // Even numbered board size
+        isThereAPossibleSolution = ((inversions + blankRowNumber) % 2 != 0 );
+    } else { // Odd numbered board size
+        isThereAPossibleSolution = (inversions % 2 == 0);
+    }
+
+    return isThereAPossibleSolution;
+}
+
+bool EightPuzzle::HeuristicTree::isBoardImpossible() {
+    return impossibleToSolve;
 }

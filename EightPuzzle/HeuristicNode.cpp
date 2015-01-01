@@ -14,11 +14,11 @@ void EightPuzzle::HeuristicNode::calculateScore(Utility* utility) {
     unsigned int tempScore{ 0 };
     size_t targetSize = utility->getTarget().size();
 
-    for(size_t i = 0; i < targetSize; ++i) {
+    for(size_t i = 1; i < targetSize; ++i) {
         tempScore += utility->getManhattanDistFrom(board.contents.at(i), utility->getTarget().at(i));
     }
 
-    this->score = tempScore * calculateComplexityFactor(utility);
+    this->score = tempScore;
 }
 
 unsigned int EightPuzzle::HeuristicNode::getScore() {
