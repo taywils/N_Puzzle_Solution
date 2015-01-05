@@ -7,6 +7,8 @@
 #include <map>
 #include <random>
 #include <iterator>
+#include <queue>
+#include <functional>
 
 namespace EightPuzzle {
     class Utility {

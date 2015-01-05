@@ -258,6 +258,7 @@
 				A57CD64E1A4A5F380062EB75 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

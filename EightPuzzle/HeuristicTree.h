@@ -6,16 +6,25 @@
 
 namespace EightPuzzle {
     
+    class PriorityCompare {
+    public:
+        // Minium priority goes to the top of the Heap
+        bool operator()(const HeuristicNode* lhs, const HeuristicNode* rhs) {
+            return lhs->getPriority() > rhs->getPriority();
+        }
+    };
+    
     class HeuristicTree {
     public:
-        
+
         HeuristicTree(HeuristicNode*, Utility*);
-        
+
+        std::priority_queue<HeuristicNode*, std::vector<HeuristicNode*>, PriorityCompare > priorityQueue;
+
         void setRoot(HeuristicNode*);
         HeuristicNode* getRoot();
         void move();
         int isSolved();
-        unsigned int makeDecision();
         Utility* getUtility();
         bool isBoardImpossible();
         
@@ -23,6 +32,8 @@ namespace EightPuzzle {
         
         void generateMoves();
         bool doesBoardHaveSolution();
+        unsigned int makeDecision();
+        HeuristicNode* makeDecisionRefactor();
 
         Utility* utility;
         HeuristicNode* root;

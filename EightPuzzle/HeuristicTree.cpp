@@ -35,9 +35,10 @@ void EightPuzzle::HeuristicTree::generateMoves() {
         newHeuristicNode = new HeuristicNode{newBoard, getRoot()};
         newHeuristicNode->calculateScore(getUtility());
 
-        decisionVector.push_back(newHeuristicNode->getScore());
-        
+        decisionVector.push_back(newHeuristicNode->getPriority());
+
         root->children.push_back(newHeuristicNode);
+        priorityQueue.push(newHeuristicNode);
     }
 }
 
@@ -46,6 +47,7 @@ void EightPuzzle::HeuristicTree::move() {
 
     unsigned int decisionIndex = makeDecision();
     EightPuzzle::HeuristicNode* destinationNode = getRoot()->children.at(decisionIndex);
+    //EightPuzzle::HeuristicNode* destinationNode = makeDecisionRefactor();
     setRoot(destinationNode);
 
     std::cout << std::endl;
@@ -56,6 +58,12 @@ void EightPuzzle::HeuristicTree::move() {
 
 int EightPuzzle::HeuristicTree::isSolved() {
     return 0 == getRoot()->getScore();
+}
+
+EightPuzzle::HeuristicNode* EightPuzzle::HeuristicTree::makeDecisionRefactor() {
+    auto minPriorityHeuristicNode = priorityQueue.top();
+    priorityQueue.pop();
+    return minPriorityHeuristicNode;
 }
 
 unsigned int EightPuzzle::HeuristicTree::makeDecision() {
@@ -83,40 +91,33 @@ EightPuzzle::Utility* EightPuzzle::HeuristicTree::getUtility() {
 
 // Based on notes from https://www.cs.princeton.edu/courses/archive/fall12/cos226/assignments/8puzzle.html
 bool EightPuzzle::HeuristicTree::doesBoardHaveSolution() {
-    bool isThereAPossibleSolution{false};
-    auto boardContents = getRoot()->board.contents;
-
-    unsigned int blankIndex{0};
-    for(unsigned int i = 0; i < boardContents.size(); ++i) {
-        if(boardContents.at(i) == 0) {
-            blankIndex = i;
-        }
-    }
+    unsigned int blankIndex = getRoot()->board.getZeroPosition();
 
     unsigned int blankRowNumber = blankIndex / getUtility()->getN();
 
     size_t i{1};
     int j = (int)i - 1;
     unsigned int inversions{0};
-
-    // The inversion calculation ignores the zero value
-    auto zeroIterator = find(boardContents.begin(), boardContents.end(), 0);
-    if(zeroIterator != boardContents.end()) {
-        boardContents.erase(zeroIterator);
+    std::map<unsigned int, unsigned int> boardContentsWithoutZero;
+    
+    for(size_t i = 0; i < getRoot()->board.contents.size(); ++i) {
+        boardContentsWithoutZero[getRoot()->board.contents.at(i)] = (unsigned int)i;
     }
 
-    while(i < boardContents.size()) {
-        if(boardContents.at(j) > boardContents.at(i)) {
+    while(i < (boardContentsWithoutZero.size() - 1)) {
+        if(boardContentsWithoutZero.at(j) > boardContentsWithoutZero.at((unsigned int)i)) {
             inversions++;
         }
-        
+
         --j;
-        
+
         if(j < 0) {
             ++i;
             j = (int)i - 1;
         }
     }
+
+    bool isThereAPossibleSolution{false};
 
     if(getUtility()->getPuzzleSize() % 2 == 0) { // Even numbered board size
         isThereAPossibleSolution = ((inversions + blankRowNumber) % 2 != 0 );

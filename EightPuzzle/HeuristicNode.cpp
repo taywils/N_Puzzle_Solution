@@ -7,7 +7,8 @@ board(board) {
 
 EightPuzzle::HeuristicNode::HeuristicNode(EightPuzzle::Board board, HeuristicNode* parent) :
 board(board),
-parent(parent) {
+parent(parent){
+    moves = 0;
 }
 
 void EightPuzzle::HeuristicNode::calculateScore(Utility* utility) {
@@ -19,14 +20,27 @@ void EightPuzzle::HeuristicNode::calculateScore(Utility* utility) {
     }
 
     this->score = tempScore;
+
+    calculateMovement();
 }
 
-unsigned int EightPuzzle::HeuristicNode::getScore() {
+unsigned int EightPuzzle::HeuristicNode::getScore() const {
     return this->score;
 }
 
-unsigned int EightPuzzle::HeuristicNode::calculateComplexityFactor(Utility* utility) {
-    // Penalize board positions with high numbers of possible moves
-    auto legalMoves = utility->getLegalMoveTable()[board.getZeroPosition()];
-    return (unsigned int)legalMoves.size();
+void EightPuzzle::HeuristicNode::calculateMovement() {
+    // The number of moves is equal to the distance from the root to the current node
+    HeuristicNode* nodeWalker = this;
+    while(nodeWalker->parent != nullptr) {
+        ++moves;
+        nodeWalker = nodeWalker->parent;
+    }
+}
+
+unsigned int EightPuzzle::HeuristicNode::getMoves() const {
+    return this->moves;
+}
+
+unsigned int EightPuzzle::HeuristicNode::getPriority() const {
+    return getScore() + getMoves();
 }

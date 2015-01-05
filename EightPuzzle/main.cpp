@@ -4,7 +4,7 @@
 
 int main(int argc, const char * argv[]) {
     const unsigned int N{3};
-    EightPuzzle::Board source({ 8, 7, 6, 1, 0, 5, 4, 3, 2 }, N);
+    EightPuzzle::Board source({ 8, 0, 3, 1, 5, 2, 7, 4, 6 }, N);
     EightPuzzle::Board target({ 8, 0, 1, 2, 3, 4, 5, 6, 7 }, N);
 
     // For content Vectors
@@ -21,7 +21,7 @@ int main(int argc, const char * argv[]) {
     ht.getRoot()->calculateScore(ht.getUtility());
 
     ht.getRoot()->board.print();
-    
+
     if(ht.isBoardImpossible()) {
         std::cout << "Impossible board" << std::endl;
     } else {

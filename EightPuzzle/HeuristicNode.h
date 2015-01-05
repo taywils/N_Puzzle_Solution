@@ -5,24 +5,28 @@
 #include "Board.h"
 
 namespace EightPuzzle {
-    
+
     class HeuristicNode {
     public:
-        
+
         HeuristicNode(Board);
         HeuristicNode(Board, HeuristicNode*);
-        
+
         void calculateScore(Utility*);
-        unsigned int getScore();
-        
+        unsigned int getScore() const;
+        unsigned int getMoves() const;
+        unsigned int getPriority() const;
+
         Board board;
         HeuristicNode* parent;
         std::vector<HeuristicNode*> children;
         
     private:
-        
+
+        void calculateMovement();
+
         unsigned int score;
-        unsigned int calculateComplexityFactor(Utility*);
+        unsigned int moves;
     };
 }
 
